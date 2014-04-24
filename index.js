@@ -1,10 +1,7 @@
 'use strict';
 
-var execFile = require('child_process').execFile;
-var fs = require('fs');
+var ExecBuffer = require('exec-buffer');
 var imageType = require('image-type');
-var tempfile = require('tempfile');
-var rm = require('rimraf');
 var zopfli = require('zopflipng-bin').path;
 
 /**
@@ -22,9 +19,8 @@ module.exports = function (opts) {
             return cb();
         }
 
+        var exec = new ExecBuffer();
         var args = ['-y'];
-        var src = tempfile('.png');
-        var dest = tempfile('.png');
 
         if (opts.more) {
             args.push('-m');
@@ -34,34 +30,15 @@ module.exports = function (opts) {
             args.push('--lossy_8bit');
         }
 
-        fs.writeFile(src, file.contents, function (err) {
-            if (err) {
-                return cb(err);
-            }
-
-            execFile(zopfli, args.concat([src, dest]), function (err) {
+        exec
+            .use(zopfli, args.concat([exec.src(), exec.dest()]))
+            .run(file.contents, function (err, buf) {
                 if (err) {
                     return cb(err);
                 }
 
-                fs.readFile(dest, function (err, buf) {
-                    rm(src, function (err) {
-                        if (err) {
-                            return cb(err);
-                        }
-
-                        rm(dest, function (err) {
-                            if (err) {
-                                return cb(err);
-                            }
-
-                            file.contents = buf;
-
-                            cb();
-                        });
-                    });
-                });
+                file.contents = buf;
+                cb();
             });
-        });
     };
 };
