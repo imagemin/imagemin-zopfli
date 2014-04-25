@@ -22,6 +22,22 @@ var imagemin = new Imagemin()
 imagemin.optimize();
 ```
 
+## Options
+
+### 8bit
+
+Type: `Boolean`  
+Default: `false`
+
+Convert 16-bit per channel image to 8-bit per channel.
+
+### more
+
+Type: `Boolean`  
+Default: `false`
+
+Compress more using more iterations (depending on file size).
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](https://github.com/kevva)
