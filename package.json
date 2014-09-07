@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "zopfli image-min plugin",
   "license": "MIT",
-  "repository": "kevva/imagemin-zopfli",
+  "repository": "imagemin/imagemin-zopfli",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
@@ -25,15 +25,16 @@
     "img",
     "minify",
     "optimize",
-    "png"
+    "png",
+    "zopflipng"
   ],
   "dependencies": {
-    "exec-buffer": "^0.1.1",
-    "image-type": "^0.1.1",
-    "zopflipng-bin": "^0.1.8"
+    "exec-buffer": "^1.0.1",
+    "is-png": "^1.0.0",
+    "zopflipng-bin": "^1.0.0"
   },
   "devDependencies": {
-    "imagemin": "^0.4.7",
+    "imagemin": "^1.0.5",
     "mocha": "^1.18.2"
   }
 }

@@ -12,33 +12,33 @@ var zopfli = require('zopflipng-bin').path;
  */
 
 module.exports = function (opts) {
-    opts = opts || {};
+	opts = opts || {};
 
-    return function (file, imagemin, cb) {
-        if (imageType(file.contents) !== 'png') {
-            return cb();
-        }
+	return function (file, imagemin, cb) {
+		if (imageType(file.contents) !== 'png') {
+			return cb();
+		}
 
-        var exec = new ExecBuffer();
-        var args = ['-y'];
+		var exec = new ExecBuffer();
+		var args = ['-y'];
 
-        if (opts.more) {
-            args.push('-m');
-        }
+		if (opts.more) {
+			args.push('-m');
+		}
 
-        if (opts['8bit']) {
-            args.push('--lossy_8bit');
-        }
+		if (opts['8bit']) {
+			args.push('--lossy_8bit');
+		}
 
-        exec
-            .use(zopfli, args.concat([exec.src(), exec.dest()]))
-            .run(file.contents, function (err, buf) {
-                if (err) {
-                    return cb(err);
-                }
+		exec
+			.use(zopfli, args.concat([exec.src(), exec.dest()]))
+			.run(file.contents, function (err, buf) {
+				if (err) {
+					return cb(err);
+				}
 
-                file.contents = buf;
-                cb();
-            });
-    };
+				file.contents = buf;
+				cb();
+			});
+	};
 };

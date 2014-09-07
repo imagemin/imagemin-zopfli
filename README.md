@@ -1,12 +1,14 @@
-# imagemin-zopfli [![Build Status](https://travis-ci.org/kevva/imagemin-zopfli.svg?branch=master)](https://travis-ci.org/kevva/imagemin-zopfli)
+# imagemin-zopfli [![Build Status](http://img.shields.io/travis/imagemin/imagemin-zopfli.svg?style=flat)](https://travis-ci.org/imagemin/imagemin-zopfli)
 
 > zopfli image-min plugin
+
 
 ## Install
 
 ```bash
 $ npm install --save imagemin-zopfli
 ```
+
 
 ## Usage
 
@@ -15,12 +17,13 @@ var Imagemin = require('image-min');
 var zopfli = require('imagemin-zopfli');
 
 var imagemin = new Imagemin()
-    .src('foo.png')
-    .dest('foo-optimized.png')
-    .use(zopfli({ more: true, '8bit': true }));
+	.src('foo.png')
+	.dest('foo-optimized.png')
+	.use(zopfli({ more: true, '8bit': true }));
 
 imagemin.optimize();
 ```
+
 
 ## Options
 
@@ -38,6 +41,7 @@ Default: `false`
 
 Compress more using more iterations (depending on file size).
 
+
 ## License
 
-MIT © [Kevin Mårtensson](https://github.com/kevva)
+MIT © [imagemin](https://github.com/imagemin)
