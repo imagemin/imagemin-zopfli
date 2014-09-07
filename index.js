@@ -1,7 +1,7 @@
 'use strict';
 
 var ExecBuffer = require('exec-buffer');
-var imageType = require('image-type');
+var isPng = require('is-png');
 var zopfli = require('zopflipng-bin').path;
 
 /**
@@ -15,8 +15,9 @@ module.exports = function (opts) {
 	opts = opts || {};
 
 	return function (file, imagemin, cb) {
-		if (imageType(file.contents) !== 'png') {
-			return cb();
+		if (!isPng(file.contents)) {
+			cb();
+			return;
 		}
 
 		var exec = new ExecBuffer();
@@ -34,7 +35,8 @@ module.exports = function (opts) {
 			.use(zopfli, args.concat([exec.src(), exec.dest()]))
 			.run(file.contents, function (err, buf) {
 				if (err) {
-					return cb(err);
+					cb(err);
+					return;
 				}
 
 				file.contents = buf;
