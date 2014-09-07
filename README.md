@@ -1,6 +1,6 @@
 # imagemin-zopfli [![Build Status](http://img.shields.io/travis/imagemin/imagemin-zopfli.svg?style=flat)](https://travis-ci.org/imagemin/imagemin-zopfli) [![Build status](https://ci.appveyor.com/api/projects/status/au86jlv1nyfcv40h)](https://ci.appveyor.com/project/ShinnosukeWatanabe/imagemin-zopfli)
 
-> zopfli image-min plugin
+> zopfli imagemin plugin
 
 
 ## Install
@@ -13,7 +13,7 @@ $ npm install --save imagemin-zopfli
 ## Usage
 
 ```js
-var Imagemin = require('image-min');
+var Imagemin = require('imagemin');
 var zopfli = require('imagemin-zopfli');
 
 var imagemin = new Imagemin()
