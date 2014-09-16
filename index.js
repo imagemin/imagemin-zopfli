@@ -2,6 +2,7 @@
 
 var ExecBuffer = require('exec-buffer');
 var isPng = require('is-png');
+var through = require('through2');
 var zopfli = require('zopflipng-bin').path;
 
 /**
@@ -14,9 +15,19 @@ var zopfli = require('zopflipng-bin').path;
 module.exports = function (opts) {
 	opts = opts || {};
 
-	return function (file, imagemin, cb) {
+	return through.obj(function (file, imagemin, cb) {
+		if (file.isNull()) {
+			cb(null, file);
+			return;
+		}
+
+		if (file.isStream()) {
+			cb(new Error('Streaming is not supported'));
+			return;
+		}
+
 		if (!isPng(file.contents)) {
-			cb();
+			cb(null, file);
 			return;
 		}
 
@@ -40,7 +51,7 @@ module.exports = function (opts) {
 				}
 
 				file.contents = buf;
-				cb();
+				cb(null, file);
 			});
-	};
+	});
 };

@@ -17,11 +17,30 @@ var Imagemin = require('imagemin');
 var zopfli = require('imagemin-zopfli');
 
 var imagemin = new Imagemin()
-	.src('foo.png')
-	.dest('foo-optimized.png')
-	.use(zopfli({ more: true, '8bit': true }));
+	.src('images/*.png')
+	.dest('build/images')
+	.use(zopfli({ more: true }));
 
-imagemin.optimize();
+imagemin.run(function (err, files) {
+	if (err) {
+		throw err;
+	}
+
+	console.log('Files optimized successfully!');
+});
+```
+
+You can also use this plugin with [gulp](http://gulpjs.com/):
+
+```js
+var gulp = require('gulp');
+var zopfli = require('imagemin-zopfli');
+
+gulp.task('default', function () {
+	return gulp.src('images/*.png')
+		.pipe(zopfli())
+		.pipe(gulp.dest('build/images'));
+});
 ```
 
 
