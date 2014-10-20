@@ -34,11 +34,11 @@
     "exec-buffer": "^1.0.1",
     "is-png": "^1.0.0",
     "through2": "^0.6.1",
-    "zopflipng-bin": "^1.0.0"
+    "zopflipng-bin": "^2.0.0"
   },
   "devDependencies": {
     "ava": "^0.0.4",
-    "buffer-equal": "0.0.1",
+    "buffer-equal": "^0.0.1",
     "vinyl-file": "^1.1.0"
   }
 }
