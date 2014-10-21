@@ -1,6 +1,6 @@
 {
   "name": "imagemin-zopfli",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "zopfli imagemin plugin",
   "license": "MIT",
   "repository": "imagemin/imagemin-zopfli",
