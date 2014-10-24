@@ -38,7 +38,7 @@ var zopfli = require('imagemin-zopfli');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(zopfli())
+		.pipe(zopfli({ more: true })())
 		.pipe(gulp.dest('build/images'));
 });
 ```
