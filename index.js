@@ -50,7 +50,10 @@ module.exports = function (opts) {
 					return;
 				}
 
-				file.contents = buf;
+				if (buf.length < file.contents.length) {
+					file.contents = buf;
+				}
+
 				cb(null, file);
 			});
 	});
