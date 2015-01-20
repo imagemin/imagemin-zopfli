@@ -31,7 +31,7 @@
     "zopflipng"
   ],
   "dependencies": {
-    "exec-buffer": "^1.0.1",
+    "exec-buffer": "^2.0.0",
     "is-png": "^1.0.0",
     "through2": "^0.6.1",
     "zopflipng-bin": "^2.0.0"
