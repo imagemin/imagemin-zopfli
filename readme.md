@@ -19,7 +19,7 @@ var zopfli = require('imagemin-zopfli');
 var imagemin = new Imagemin()
 	.src('images/*.png')
 	.dest('build/images')
-	.use(zopfli({ more: true }));
+	.use(zopfli({more: true}));
 
 imagemin.run(function (err, files) {
 	if (err) {
@@ -38,7 +38,7 @@ var zopfli = require('imagemin-zopfli');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(zopfli({ more: true })())
+		.pipe(zopfli({more: true})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
