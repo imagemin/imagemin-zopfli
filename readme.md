@@ -5,7 +5,7 @@
 
 ## Install
 
-```bash
+```
 $ npm install --save imagemin-zopfli
 ```
 
@@ -14,48 +14,43 @@ $ npm install --save imagemin-zopfli
 
 ```js
 var Imagemin = require('imagemin');
-var zopfli = require('imagemin-zopfli');
+var imageminZopfli = require('imagemin-zopfli');
 
-var imagemin = new Imagemin()
+new Imagemin()
 	.src('images/*.png')
 	.dest('build/images')
-	.use(zopfli({more: true}));
-
-imagemin.run(function (err, files) {
-	if (err) {
-		throw err;
-	}
-
-	console.log('Files optimized successfully!');
-});
+	.use(imageminZopfli({more: true}))
+	.run();
 ```
 
 You can also use this plugin with [gulp](http://gulpjs.com/):
 
 ```js
 var gulp = require('gulp');
-var zopfli = require('imagemin-zopfli');
+var imageminZopfli = require('imagemin-zopfli');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(zopfli({more: true})())
+		.pipe(imageminZopfli({more: true})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
 
 
-## Options
+## API
 
-### 8bit
+### imageminZopfli(options)
 
-Type: `Boolean`  
+#### options.8bit
+
+Type: `boolean`  
 Default: `false`
 
 Convert 16-bit per channel image to 8-bit per channel.
 
-### more
+#### options.more
 
-Type: `Boolean`  
+Type: `boolean`  
 Default: `false`
 
 Compress more using more iterations (depending on file size).
