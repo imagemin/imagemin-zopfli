@@ -39,6 +39,7 @@ module.exports = function (opts) {
 			.use(zopfli, args.concat([execBuffer.src(), execBuffer.dest()]))
 			.run(file.contents, function (err, buf) {
 				if (err) {
+					err.fileName = file.path;
 					cb(err);
 					return;
 				}
