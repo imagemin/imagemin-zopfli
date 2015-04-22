@@ -3,7 +3,7 @@
 var ExecBuffer = require('exec-buffer');
 var isPng = require('is-png');
 var through = require('through2');
-var zopfli = require('zopflipng-bin').path;
+var zopfli = require('zopflipng-bin');
 
 module.exports = function (opts) {
 	opts = opts || {};
