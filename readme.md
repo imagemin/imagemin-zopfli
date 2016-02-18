@@ -17,10 +17,10 @@ var Imagemin = require('imagemin');
 var imageminZopfli = require('imagemin-zopfli');
 
 new Imagemin()
-	.src('images/*.png')
-	.dest('build/images')
-	.use(imageminZopfli({more: true}))
-	.run();
+    .src('images/*.png')
+    .dest('build/images')
+    .use(imageminZopfli({more: true}))
+    .run();
 ```
 
 You can also use this plugin with [gulp](http://gulpjs.com/):
@@ -30,9 +30,9 @@ var gulp = require('gulp');
 var imageminZopfli = require('imagemin-zopfli');
 
 gulp.task('default', function () {
-	return gulp.src('images/*.png')
-		.pipe(imageminZopfli({more: true})())
-		.pipe(gulp.dest('build/images'));
+    return gulp.src('images/*.png')
+        .pipe(imageminZopfli({more: true})())
+        .pipe(gulp.dest('build/images'));
 });
 ```
 
@@ -43,14 +43,35 @@ gulp.task('default', function () {
 
 #### options.8bit
 
-Type: `boolean`  
+Type: `boolean`
 Default: `false`
 
 Convert 16-bit per channel image to 8-bit per channel.
 
+#### options.transparent
+
+Type: `boolean`
+Default: `false`
+
+Allow altering hidden colors of fully transparent pixels.
+
+#### options.iterations
+
+Type: `int`
+Default: `15`
+
+Number of iterations for small images < 200 KiB.
+
+#### options.iterationsLarge
+
+Type: `int`
+Default: `5`
+
+Number of iterations for large images > 200 KiB.
+
 #### options.more
 
-Type: `boolean`  
+Type: `boolean`
 Default: `false`
 
 Compress more using more iterations (depending on file size).

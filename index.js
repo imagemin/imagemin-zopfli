@@ -27,12 +27,24 @@ module.exports = function (opts) {
 		var execBuffer = new ExecBuffer();
 		var args = ['-y'];
 
-		if (opts.more) {
-			args.push('-m');
-		}
-
 		if (opts['8bit']) {
 			args.push('--lossy_8bit');
+		}
+
+		if (opts.transparent) {
+			args.push('--lossy_transparent');
+		}
+
+		if (opts.iterations) {
+			args.push('--iterations=' + opts.iterations);
+		}
+
+		if (opts.iterationsLarge) {
+			args.push('--iterations_large=' + opts.iterationsLarge);
+		}
+
+		if (opts.more) {
+			args.push('-m');
 		}
 
 		execBuffer
