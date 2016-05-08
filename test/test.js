@@ -1,60 +1,38 @@
 'use strict';
-
+var fs = require('fs');
 var path = require('path');
 var bufferEqual = require('buffer-equal');
 var isPng = require('is-png');
-var read = require('vinyl-file').read;
 var test = require('ava');
 var imageminZopfli = require('../');
 
 test('optimize a PNG', function (t) {
-	t.plan(3);
+	t.plan(2);
 
-	read(path.join(__dirname, 'fixtures/test.png'), function (err, file) {
-		t.assert(!err, err);
+	var buf = fs.readFileSync(path.join(__dirname, 'fixtures/test.png'));
 
-		var stream = imageminZopfli()();
-		var size = file.contents.length;
-
-		stream.on('data', function (data) {
-			t.assert(data.contents.length < size, data.contents.length);
-			t.assert(isPng(data.contents));
-		});
-
-		stream.end(file);
+	imageminZopfli()(buf).then(function (data) {
+		t.assert(data.length < buf.length, data.length);
+		t.assert(isPng(data));
 	});
 });
 
 test('skip optimizing a non-PNG file', function (t) {
-	t.plan(2);
+	t.plan(1);
 
-	read(__filename, function (err, file) {
-		t.assert(!err, err);
+	var buf = fs.readFileSync(__filename);
 
-		var stream = imageminZopfli()();
-		var buf = file.contents.slice();
-
-		stream.on('data', function (data) {
-			t.assert(bufferEqual(file.contents, buf));
-		});
-
-		stream.end(file);
+	imageminZopfli()(buf).then(function (data) {
+		t.assert(bufferEqual(data, buf));
 	});
 });
 
 test('skip optimizing an already optimized PNG', function (t) {
-	t.plan(2);
+	t.plan(1);
 
-	read(path.join(__dirname, 'fixtures/test-smallest.png'), function (err, file) {
-		t.assert(!err, err);
+	var buf = fs.readFileSync(path.join(__dirname, 'fixtures/test-smallest.png'));
 
-		var stream = imageminZopfli()();
-		var buf = file.contents.slice();
-
-		stream.on('data', function (data) {
-			t.assert(bufferEqual(file.contents, buf));
-		});
-
-		stream.end(file);
+	imageminZopfli()(buf).then(function (data) {
+		t.assert(bufferEqual(data, buf));
 	});
 });

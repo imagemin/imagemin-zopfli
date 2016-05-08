@@ -1,65 +1,49 @@
 'use strict';
-var ExecBuffer = require('exec-buffer');
-var isPng = require('is-png');
-var through = require('through2');
-var zopfli = require('zopflipng-bin');
+const execBuffer = require('exec-buffer');
+const isPng = require('is-png');
+const zopfli = require('zopflipng-bin');
 
-module.exports = function (opts) {
-	opts = opts || {};
+module.exports = opts => buf => {
+	opts = Object.assign({}, opts);
 
-	return through.ctor({objectMode: true}, function (file, enc, cb) {
-		if (file.isNull()) {
-			cb(null, file);
-			return;
-		}
+	if (!Buffer.isBuffer(buf)) {
+		return Promise.reject(new TypeError('Expected a buffer'));
+	}
 
-		if (file.isStream()) {
-			cb(new Error('Streaming is not supported'));
-			return;
-		}
+	if (!isPng(buf)) {
+		return Promise.resolve(buf);
+	}
 
-		if (!isPng(file.contents)) {
-			cb(null, file);
-			return;
-		}
+	const args = ['-y'];
 
-		var execBuffer = new ExecBuffer();
-		var args = ['-y'];
+	if (opts['8bit']) {
+		args.push('--lossy_8bit');
+	}
 
-		if (opts['8bit']) {
-			args.push('--lossy_8bit');
-		}
+	if (opts.transparent) {
+		args.push('--lossy_transparent');
+	}
 
-		if (opts.transparent) {
-			args.push('--lossy_transparent');
-		}
+	if (opts.iterations) {
+		args.push(`--iterations=${opts.iterations}`);
+	}
 
-		if (opts.iterations) {
-			args.push('--iterations=' + opts.iterations);
-		}
+	if (opts.iterationsLarge) {
+		args.push(`--iterations_large=${opts.iterationsLarge}`);
+	}
 
-		if (opts.iterationsLarge) {
-			args.push('--iterations_large=' + opts.iterationsLarge);
-		}
+	if (opts.more) {
+		args.push('-m');
+	}
 
-		if (opts.more) {
-			args.push('-m');
-		}
+	args.push(execBuffer.input, execBuffer.output);
 
-		execBuffer
-			.use(zopfli, args.concat([execBuffer.src(), execBuffer.dest()]))
-			.run(file.contents, function (err, buf) {
-				if (err) {
-					err.fileName = file.path;
-					cb(err);
-					return;
-				}
-
-				if (buf.length < file.contents.length) {
-					file.contents = buf;
-				}
-
-				cb(null, file);
-			});
+	return execBuffer({
+		input: buf,
+		bin: zopfli,
+		args
+	}).catch(err => {
+		err.message = err.stderr || err.message;
+		throw err;
 	});
 };

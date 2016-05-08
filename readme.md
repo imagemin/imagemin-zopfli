@@ -13,33 +13,22 @@ $ npm install --save imagemin-zopfli
 ## Usage
 
 ```js
-const Imagemin = require('imagemin');
+const imagemin = require('imagemin');
 const imageminZopfli = require('imagemin-zopfli');
 
-new Imagemin()
-	.src('images/*.png')
-	.dest('build/images')
-	.use(imageminZopfli({more: true}))
-	.run();
-```
-
-You can also use this plugin with [gulp](http://gulpjs.com):
-
-```js
-const gulp = require('gulp');
-const imageminZopfli = require('imagemin-zopfli');
-
-gulp.task('default', () =>
-	gulp.src('images/*.png')
-		.pipe(imageminZopfli({more: true})())
-		.pipe(gulp.dest('build/images'))
-);
+imagemin(['images/*.png'], 'build/images', {
+    use: [
+        imageminZopfli({more: true})
+    ]
+}).then(() => {
+    console.log('Images optimized');
+});
 ```
 
 
 ## API
 
-### imageminZopfli([options])
+### imageminZopfli([options])(buffer)
 
 #### options
 
@@ -79,6 +68,12 @@ Type: `boolean`<br>
 Default: `false`
 
 Compress more using more iterations (depending on file size).
+
+#### buffer
+
+Type: `buffer`
+
+Buffer to optimize.
 
 
 ## License
