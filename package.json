@@ -24,7 +24,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "xo && node test/test.js"
+    "test": "xo && ava"
   },
   "files": [
     "index.js"
@@ -46,8 +46,8 @@
     "zopflipng-bin": "^3.0.0"
   },
   "devDependencies": {
-    "ava": "^0.0.4",
-    "buffer-equal": "^0.0.1",
+    "ava": "*",
+    "pify": "^2.3.0",
     "xo": "*"
   },
   "xo": {
