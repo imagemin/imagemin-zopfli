@@ -17,11 +17,11 @@ const imagemin = require('imagemin');
 const imageminZopfli = require('imagemin-zopfli');
 
 imagemin(['images/*.png'], 'build/images', {
-    use: [
-        imageminZopfli({more: true})
-    ]
+	use: [
+		imageminZopfli({more: true})
+	]
 }).then(() => {
-    console.log('Images optimized');
+	console.log('Images optimized');
 });
 ```
 
@@ -32,7 +32,7 @@ imagemin(['images/*.png'], 'build/images', {
 
 #### options
 
-Type: `object`
+Type: `Object`
 
 ##### 8bit
 
@@ -71,7 +71,7 @@ Compress more using more iterations (depending on file size).
 
 #### buffer
 
-Type: `buffer`
+Type: `Buffer`
 
 Buffer to optimize.
 
