@@ -75,6 +75,13 @@ Type: `Buffer`
 
 Buffer to optimize.
 
+#### keepChunks
+
+Type: `String`
+
+Keep chunks that might affect some renderers during compression.
+See [this thread](https://github.com/google/zopfli/issues/113) for details.
+
 
 ## License
 

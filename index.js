@@ -36,8 +36,8 @@ module.exports = opts => buf => {
 		args.push('-m');
 	}
 
-	if (opts.keepchunks) {
-		args.push(`--keepchunks=${opts.keepchunks}`);
+	if (opts.keepChunks) {
+		args.push(`--keepchunks=${opts.keepChunks}`);
 	}
 
 	args.push(execBuffer.input, execBuffer.output);
