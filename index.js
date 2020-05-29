@@ -28,10 +28,6 @@ module.exports = options => buf => {
 		args.push(`--iterations=${options.iterations}`);
 	}
 
-	if (options.iterationsLarge) {
-		args.push(`--iterations_large=${options.iterationsLarge}`);
-	}
-
 	if (options.more) {
 		args.push('-m');
 	}
