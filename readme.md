@@ -55,13 +55,6 @@ Default: `15`
 
 Number of iterations for images smaller than 200 KiB.
 
-##### iterationsLarge
-
-Type: `integer`<br>
-Default: `5`
-
-Number of iterations for images larger than 200 KiB.
-
 ##### more
 
 Type: `boolean`<br>
