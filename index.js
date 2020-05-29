@@ -3,8 +3,8 @@ const execBuffer = require('exec-buffer');
 const isPng = require('is-png');
 const zopfli = require('zopflipng-bin');
 
-module.exports = opts => buf => {
-	opts = Object.assign({}, opts);
+module.exports = options => buf => {
+	options = {...options};
 
 	if (!Buffer.isBuffer(buf)) {
 		return Promise.reject(new TypeError('Expected a buffer'));
@@ -16,23 +16,23 @@ module.exports = opts => buf => {
 
 	const args = ['-y'];
 
-	if (opts['8bit']) {
+	if (options['8bit']) {
 		args.push('--lossy_8bit');
 	}
 
-	if (opts.transparent) {
+	if (options.transparent) {
 		args.push('--lossy_transparent');
 	}
 
-	if (opts.iterations) {
-		args.push(`--iterations=${opts.iterations}`);
+	if (options.iterations) {
+		args.push(`--iterations=${options.iterations}`);
 	}
 
-	if (opts.iterationsLarge) {
-		args.push(`--iterations_large=${opts.iterationsLarge}`);
+	if (options.iterationsLarge) {
+		args.push(`--iterations_large=${options.iterationsLarge}`);
 	}
 
-	if (opts.more) {
+	if (options.more) {
 		args.push('-m');
 	}
 
