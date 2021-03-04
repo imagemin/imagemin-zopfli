@@ -1,4 +1,4 @@
-# imagemin-zopfli [![Build Status](https://travis-ci.org/imagemin/imagemin-zopfli.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-zopfli)
+# imagemin-zopfli ![GitHub Actions Status](https://github.com/imagemin/imagemin-zopfli/workflows/test/badge.svg?branch=master)
 
 > [Zopfli](https://en.wikipedia.org/wiki/Zopfli) imagemin plugin
 
